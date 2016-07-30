@@ -27,9 +27,9 @@ Template.addFridge.events({
             }
             Meteor.call('addToFridge', doc);
         }
-        BlazeLayout.render("mainLayout", {
-            content: HOME
-        });
+
+        Bert.alert('Added to Fridge!', 'success', 'growl-top-right');
+        FlowRouter.go('/');
     }
 });
 
