@@ -1,4 +1,5 @@
 allow-deny@1.0.5
+andrasph:bootstrap-notebook-theme@0.0.2
 autopublish@1.0.7
 autoupdate@1.2.11
 babel-compiler@6.9.0
@@ -35,6 +36,7 @@ jquery@1.11.9
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.12.1
 launch-screen@1.0.12
+less@1.0.14
 livedata@1.0.18
 logging@1.1.14
 meteor@1.2.16
