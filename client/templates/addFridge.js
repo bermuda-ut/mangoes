@@ -10,6 +10,7 @@ Template.addFridge.helpers({
 
 Template.addFridge.events({
     'click .nowAdd': function() {
+        console.log("adding!");
         var toAdd = TempFridge.find().fetch();
 
         for(i = 0; i < toAdd.length; i++) {
@@ -26,8 +27,9 @@ Template.addFridge.events({
             }
             Meteor.call('addToFridge', doc);
         }
-
-        FlowRouter.go('/');
+        BlazeLayout.render("mainLayout", {
+            content: HOME
+        });
     }
 });
 
