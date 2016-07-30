@@ -49,6 +49,9 @@ Template.foodCam.events({
   },
 
   'click .submitTemp'(event, instant) {
+    BlazeLayout.render("mainLayout", {
+        content: "addFridge"
+    });
   }
 });
 

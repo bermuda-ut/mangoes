@@ -12,7 +12,7 @@ def insert(w):
         coll.insert_one({'name': w})
         print "Inserted {}".format(w)
 
-customList = ['milk', 'beer', 'apple', 'egg', 'eggs'];
+customList = ['milk', 'beer', 'apple', 'egg', 'eggs', 'rice'];
 
 print "Connecting to mongoDB"
 try:
