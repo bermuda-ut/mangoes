@@ -49,10 +49,15 @@ Template.missingIngredients.helpers({
         retVal = _.filter(ingredients, function(i) {
             return ing.indexOf(i) == -1;
         });
-        return _.filter(retVal, function(i) {
-            return cart.indexOf(i) == -1;
-        });
-    } 
+        return retVal;
+    },
+    theme() {
+        let name = String(this);
+        if (Cart.findOne({name: name})) {
+            return "info"
+        }
+        return "danger";
+    }
 });
 
 Template.singleRecipe.helpers({
