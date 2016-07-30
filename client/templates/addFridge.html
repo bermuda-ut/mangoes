@@ -1,3 +1,8 @@
 <template name="addFridge">
-  HI
+{{#each myArr}}
+  {{>listItems name=name _id=_id}}
+{{/each}}
+<div class="row">
+  <button class="col-xs-12 btn btn-success nowAdd"><h2>Add to Fridge!</h2></button>
+</div>
 </template>
