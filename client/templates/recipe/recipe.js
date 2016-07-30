@@ -20,6 +20,15 @@ Template.showRecipes.helpers({
     }
 });
 
+Template.missingIngredients.events({
+    'click .missing-ing'() {
+        Cart.insert({
+            name: String(this),
+            createdAt: new Date()
+        });
+    }
+});
+
 Template.missingIngredients.helpers({
     diffIngredients (ingre) {
         ingre= ingre.split(",");
@@ -29,11 +38,19 @@ Template.missingIngredients.helpers({
         }
         let myIngredients = Fridge.find().fetch();
         let ing = [];
+        let myCart= Cart.find().fetch();
+        let cart = [];
         for (let i = 0; i < Fridge.find().count(); i++) {
             ing.push(myIngredients[i].name);
         }
-        return _.filter(ingredients, function(i) {
+        for (let i = 0; i < Cart.find().count(); i++) {
+            cart.push(myCart[i].name);
+        }
+        retVal = _.filter(ingredients, function(i) {
             return ing.indexOf(i) == -1;
+        });
+        return _.filter(retVal, function(i) {
+            return cart.indexOf(i) == -1;
         });
     } 
 });
