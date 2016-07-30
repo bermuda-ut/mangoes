@@ -1,0 +1,16 @@
+.grey{
+	background-color: #424242;
+	height: 80px;
+}
+
+.logo{
+	padding-top: 0px;
+	padding-left: 0px;
+	margin-top: 0px;
+	color: white;
+	
+}
+
+.top-buffer{
+	margin-top:20px;
+}
