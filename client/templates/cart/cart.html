@@ -1,5 +1,8 @@
 <template name="cart">
+  <h2 class="aligncenter">Cart</h2>
+  <div style="padding-top: 20px">
   {{#each cart}} 
-    {{name}}
+    {{>listItems name=name _id=_id}}
   {{/each}}
+  </div>
 </template>

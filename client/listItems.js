@@ -16,8 +16,10 @@ Template.listItems.events({
         var name = Template.instance().data.name;
         if(TempFridge.findOne({'_id': id, 'name': name}))
             TempFridge.remove({'_id': id});
-        else
+        else if(Fridge.findOne({'_id': id, 'name': name}))
             Fridge.remove({'_id': id});
+        else
+            Cart.remove({'_id': id});
     }
 });
 
