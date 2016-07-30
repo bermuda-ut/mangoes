@@ -45,6 +45,12 @@ Meteor.startup(() => {
 
         resetTemp: function() {
             TempFridge.remove({});
+        },
+
+        addToFridge: function(doc) {
+            var found = Fridge.findOne({'name': doc.name})
+            if(!found)
+                Fridge.insert(doc);
         }
     });
 });
