@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import gcloud from 'gcloud';
+import {HTTP} from 'meteor/http';
 
 var config = {
     projectId: 'pokegomap-1383',
@@ -31,6 +32,11 @@ Meteor.startup(() => {
                 console.log(err);
                 console.log(text);
             });
+        },
+        getRecipe: function(ing) {
+            this.unblock();
+            let page = "http://www.recipepuppy.com/api?i="+ing;
+            return HTTP.call("GET", page);
         }
     });
 });
