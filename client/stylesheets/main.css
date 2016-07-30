@@ -1,0 +1,24 @@
+/* CSS declarations go here */
+.nopadding {
+    padding: 0 0 0 0;
+}
+
+.nomargin {
+    margin: 0 0 0 0;
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.quirkyone {
+    left: 16.7%;
+}
+
+.camSizeCustom {
+    width: 500px;
+}

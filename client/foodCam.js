@@ -4,8 +4,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './templates/foodCam.html';
 
 Template.foodCam.helpers({
-    counter() {
-        return Template.instance().counter.get();
+    test() {
+        return Template.instance().Test.get();
     },
 });
 
@@ -13,23 +13,32 @@ Template.foodCam.events({
   'click .takePicture'(event, instance) {
         console.log("PICUTURE!");
         MeteorCameraUI.getPicture({
-            quality: 100,
-            width: 400,
-            height: 720
+            quality: 100
         }, function (error, data) {
             if (!error) {
                 this.$('.photo').attr('src', data); 
 
                 Meteor.call('uploadImg', data, function(err, res) {
-                    console.log(err);
                     console.log(res);
                 });
             }
         })
   },
+
+  'click .uploadPicture'(event, instant) {
+      filename = $('.filePath').val().split('\\')[2];
+      Template.instance().Test.set(12);
+
+      Meteor.call('imgToText', '/home/bermudaut/Bermuda/' + filename, function(err,res) {
+          console.log(res);
+      })
+  }
 });
 
 Template.foodCam.onCreated(function foodCamOnCreated() {
-  // counter starts at 0
+    TempFridge.remove({});
+
+    Template.instance().Test = new ReactiveVar(0);
+    Template.instance().cursorTempFridge = TempFridge.find();
 });
 
