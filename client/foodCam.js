@@ -36,8 +36,6 @@ Template.foodCam.events({
 });
 
 Template.foodCam.onCreated(function foodCamOnCreated() {
-    TempFridge.remove({});
-
     Template.instance().Test = new ReactiveVar(0);
     Template.instance().cursorTempFridge = TempFridge.find();
 });
