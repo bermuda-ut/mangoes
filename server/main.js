@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import gcloud from 'gcloud';
+import {HTTP} from 'meteor/http';
 
 var fs = Npm.require('fs');
 var path = Npm.require('path');
@@ -37,7 +38,13 @@ Meteor.startup(() => {
 
             myVision.detectText(basePath + 'fuckme.jpeg', function(err, text) {
                 console.log(text);
-            })
+            });
+        },
+
+        getRecipe: function(ing) {
+            this.unblock();
+            let page = "http://www.recipepuppy.com/api?i="+ing;
+            return HTTP.call("GET", page);
         }
     });
 });
