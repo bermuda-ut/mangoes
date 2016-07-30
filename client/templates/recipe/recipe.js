@@ -1,12 +1,75 @@
-Template.recipe.events({
-    'submit .recipe-form': function(event) {
-        event.preventDefault();
-        let ing = event.target.text.value;
+import {Session} from 'meteor/session';
+
+Template.showRecipes.helpers({
+    recipes() {
+        let ingre = Fridge.find().fetch();
+        let ing = [];
+        for (let i = 0; i < Fridge.find().count(); i++) {
+            ing.push(ingre[i].name);
+        }
+        ing = ing.join();
         Meteor.call('getRecipe', ing, function(e, res) {
-            let results = JSON.parse(res.content).results;
-            for (let i = 0; i < results.length; i++) {
-                console.log(results[i].title);
-            }
+            let results = _.uniq(JSON.parse(res.content).results, function(p) {return p.title});
+            results = _.filter(results, function(p) {
+                return p.thumbnail != "" && p.href.indexOf("kraft") == -1;
+            });
+            Session.set("results", results);
         });
+        return Session.get("results");
     }
+});
+
+Template.singleRecipe.helpers({
+    recipe() {
+        let ingre = Fridge.find().fetch();
+        let ing = [];
+        for (let i = 0; i < Fridge.find().count(); i++) {
+            ing.push(ingre[i].name);
+        }
+        ing = ing.join();
+        Meteor.call('getRecipe', ing, function(e, res) {
+            let results = _.uniq(JSON.parse(res.content).results, function(p) {return p.title});
+            results = _.filter(results, function(p) {
+                return p.thumbnail != "" && p.href.indexOf("kraft") == -1;
+            });
+            Session.set("results", results);
+        });
+        return Session.get("results")[0];
+    }
+});
+
+Template.recipeOfTheDay.helpers({
+	showAll() {
+		return Session.get('showAll');
+	}
+});
+
+Template.recipeOfTheDay.events({
+    'click .show-all-btn': function() {
+        Session.set('showAll', !Session.get('showAll'));
+    }
+});
+
+Template.recipeOfTheDay.onCreated(function() {
+    Session.set('showAll', false);
+});
+
+Template.missingIngredients.helpers({
+    diffIngredients (ingre) {
+        ingre= ingre.split(",");
+        let ingredients = [];
+        for (let i = 0; i < ingre.length; i++) {
+            ingredients.push(ingre[i].trim());
+        }
+        let myIngredients = Fridge.find().fetch();
+        let ing = [];
+        for (let i = 0; i < Fridge.find().count(); i++) {
+            ing.push(myIngredients[i].name);
+        }
+        console.log(ingredients);
+        console.log(ing);
+        return _.filter(ingredients, function(i) {
+            return ing.indexOf(i) == -1;
+        });
+    } 
 });
