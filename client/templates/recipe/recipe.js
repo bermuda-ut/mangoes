@@ -20,6 +20,24 @@ Template.showRecipes.helpers({
     }
 });
 
+Template.missingIngredients.helpers({
+    diffIngredients (ingre) {
+        ingre= ingre.split(",");
+        let ingredients = [];
+        for (let i = 0; i < ingre.length; i++) {
+            ingredients.push(ingre[i].trim());
+        }
+        let myIngredients = Fridge.find().fetch();
+        let ing = [];
+        for (let i = 0; i < Fridge.find().count(); i++) {
+            ing.push(myIngredients[i].name);
+        }
+        return _.filter(ingredients, function(i) {
+            return ing.indexOf(i) == -1;
+        });
+    } 
+});
+
 Template.singleRecipe.helpers({
     recipe() {
         let ingre = Fridge.find().fetch();
@@ -32,6 +50,30 @@ Template.singleRecipe.helpers({
             let results = _.uniq(JSON.parse(res.content).results, function(p) {return p.title});
             results = _.filter(results, function(p) {
                 return p.thumbnail != "" && p.href.indexOf("kraft") == -1 && p.href.indexOf("cookeatshare") == -1;
+            });
+            let diff = function(a, b) {
+                let aingredients = a.ingredients.split(",");
+                let aingre = [];
+                for (let i = 0; i < aingredients.length; i++) {
+                    aingre.push(aingredients[i].trim());
+                }
+                let bingredients = b.ingredients.split(",");
+                let bingre = [];
+                for (let i = 0; i < bingredients.length; i++) {
+                    bingre.push(bingredients[i].trim());
+                }
+                let filtera = _.filter(aingre, function(i) {
+                    return ing.indexOf(i) == -1;
+                });
+                let filterb = _.filter(bingre, function(i) {
+                    return ing.indexOf(i) == -1;
+                });
+                filtera = filtera.length;
+                filterb = filterb.length;
+                return filtera-filterb;
+            }
+            results = results.sort(function(a, b) {
+                return diff(a,b);
             });
             Session.set("results", results);
             Session.set("ingredientsCount", results.length);
@@ -68,24 +110,4 @@ Template.recipeOfTheDay.helpers({
 
 Template.recipeOfTheDay.onCreated(function() {
     Session.setDefault('showIndex', 0);
-});
-
-Template.missingIngredients.helpers({
-    diffIngredients (ingre) {
-        ingre= ingre.split(",");
-        let ingredients = [];
-        for (let i = 0; i < ingre.length; i++) {
-            ingredients.push(ingre[i].trim());
-        }
-        let myIngredients = Fridge.find().fetch();
-        let ing = [];
-        for (let i = 0; i < Fridge.find().count(); i++) {
-            ing.push(myIngredients[i].name);
-        }
-        console.log(ingredients);
-        console.log(ing);
-        return _.filter(ingredients, function(i) {
-            return ing.indexOf(i) == -1;
-        });
-    } 
 });
