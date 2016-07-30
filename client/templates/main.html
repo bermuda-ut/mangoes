@@ -2,12 +2,18 @@
   <title>projectMangoes</title>
 </head>
 
-<body>
-  <h1>Welcome to Meteor!</h1>
+<template name="mainLayout">
+  <header><h1>head</h1></header>
 
-  {{> hello}}
-  {{> info}}
-</body>
+  <main>
+    {{>Template.dynamic template=content data=params}}
+  </main>
+
+  <footer>footer</footer>
+</template>
+
+
+<!-- TEST layout -->
 
 <template name="hello">
   <button>Click Me</button>
