@@ -39,6 +39,7 @@ launch-screen@1.0.12
 less@1.0.14
 livedata@1.0.18
 logging@1.1.14
+mdg:camera@1.1.5
 meteor@1.2.16
 meteor-base@1.0.4
 minifier-css@1.2.13
@@ -52,6 +53,7 @@ mongo@1.1.10
 mongo-id@1.0.5
 npm-mongo@1.5.45
 observe-sequence@1.0.12
+okland:camera-ui@0.0.2
 ordered-dict@1.0.8
 promise@0.8.3
 random@1.0.10
@@ -60,6 +62,7 @@ reactive-var@1.0.10
 reload@1.1.10
 retry@1.0.8
 routepolicy@1.0.11
+session@1.0.5
 spacebars@1.0.12
 spacebars-compiler@1.0.12
 standard-minifier-css@1.1.8
