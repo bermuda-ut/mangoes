@@ -53,3 +53,23 @@ Template.recipeOfTheDay.events({
 Template.recipeOfTheDay.onCreated(function() {
     Session.set('showAll', false);
 });
+
+Template.missingIngredients.helpers({
+    diffIngredients (ingre) {
+        ingre= ingre.split(",");
+        let ingredients = [];
+        for (let i = 0; i < ingre.length; i++) {
+            ingredients.push(ingre[i].trim());
+        }
+        let myIngredients = Fridge.find().fetch();
+        let ing = [];
+        for (let i = 0; i < Fridge.find().count(); i++) {
+            ing.push(myIngredients[i].name);
+        }
+        console.log(ingredients);
+        console.log(ing);
+        return _.filter(ingredients, function(i) {
+            return ing.indexOf(i) == -1;
+        });
+    } 
+});

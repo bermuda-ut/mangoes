@@ -1,6 +1,7 @@
 if (Meteor.isServer) {
     Meteor.startup(() => {
         if (Fridge.find().count() < 1) {
+            console.log("Initializing ")
             let today = new Date();
             Fridge.insert({
                 name: "chicken",
@@ -24,6 +25,26 @@ if (Meteor.isServer) {
             });
             Fridge.insert({
                 name: "yogurt",
+                amount: "1kg",
+                doe: today.setDate(today.getDate() + 7)   // expires 10 days from now
+            });
+            Fridge.insert({
+                name: "corn",
+                amount: "1kg",
+                doe: today.setDate(today.getDate() + 7)   // expires 10 days from now
+            });
+            Fridge.insert({
+                name: "tortillas",
+                amount: "1kg",
+                doe: today.setDate(today.getDate() + 7)   // expires 10 days from now
+            });
+            Fridge.insert({
+                name: "cheese",
+                amount: "1kg",
+                doe: today.setDate(today.getDate() + 7)   // expires 10 days from now
+            });
+            Fridge.insert({
+                name: "monterey jack cheese",
                 amount: "1kg",
                 doe: today.setDate(today.getDate() + 7)   // expires 10 days from now
             });

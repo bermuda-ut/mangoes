@@ -13,6 +13,8 @@
           <img src={{thumbnail}}>
           <br />
           {{title}}
+          Missing ingredients:
+          {{>missingIngredients}}
         </a>
       </li>
     {{/each}}
@@ -22,8 +24,22 @@
 
 <template name="singleRecipe">
   {{#with recipe}}
-			<iframe src={{href}} style="border: 0; width: 100%; height: 70vh"></iframe>
+      <a href={{href}}>{{title}}</a>
+			<iframe src={{href}} style="border: 0; width: 100%; height: 60vh"></iframe>
+      <div class="missing-stuff">
+        Missing ingredients:
+        {{>missingIngredients}}
+        <br /> <br />
+      </div>
   {{/with}}
+</template>
+
+<template name="missingIngredients">
+  {{#each diffIngredients ingredients}}   
+  <button class="btn btn-sm btn-danger">
+    {{this}}
+  </button>
+  {{/each}}
 </template>
 
 <template name="recipeOfTheDay">
