@@ -1,29 +1,36 @@
 <template name="recipe">
-  <form class="recipe-form" method="get" style="font-size:10px;">
-    <b style="font-size:14px;">Recipe Search by Ingredients:</b>
-    <input type="text" name="text" id="i" value="Enter ingredients separated by commas" size=31 style="color:gray;font-size:11px;" onfocus="if(this.style.color=='gray'){this.style.color='black';this.value='';}" onblur="if(this.value==''){this.style.color='gray';this.value='Enter ingredients separated by commas';}" />
-    <input type="submit" value="Search" style="font-size:11px;" />
-    <br/>
-  </form>
-  {{> showRecipes}}
+  <!-- {{> showRecipes}} -->
+  <!-- {{>singleRecipe}} -->
+  {{>recipeOfTheDay}}
 </template>
 
 
 <template name="showRecipes">
   <ul>
-    {{#if canShow}}
-      {{#each recipes}}
-        <li>
-          <a href={{href}}>
-            <img src={{thumbnail}}>
-            <br />
-            {{title}}
-          </a>
-        </li>
-      {{/each}}
-    {{else}}
-        Loading ...
-    {{/if}}
+    {{#each recipes}}
+      <li>
+        <a href={{href}}>
+          <img src={{thumbnail}}>
+          <br />
+          {{title}}
+        </a>
+      </li>
+    {{/each}}
     Powered by <a href="http://www.recipepuppy.com" style="font-size:10px;">Recipe Puppy</a>
   </ul>
+</template>
+
+<template name="singleRecipe">
+  {{#with recipe}}
+			<iframe src={{href}} style="border: 0; width: 100%; height: 70vh"></iframe>
+  {{/with}}
+</template>
+
+<template name="recipeOfTheDay">
+  {{#if showAll}}
+    {{>showRecipes}}
+  {{else}}
+    {{>singleRecipe}}
+    <button class="btn show-all-btn">Show others</button>
+  {{/if}}
 </template>
