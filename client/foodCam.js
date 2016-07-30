@@ -18,6 +18,9 @@ Template.foodCam.helpers({
     },
     getStatus() {
         return Template.instance().status.get();
+    },
+    number() {
+        return Math.floor((Math.random() * 6));;
     }
 });
 
