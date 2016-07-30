@@ -41,6 +41,10 @@ Meteor.startup(() => {
             this.unblock();
             let page = "http://www.recipepuppy.com/api?i="+ing;
             return HTTP.call("GET", page);
+        },
+
+        resetTemp: function() {
+            TempFridge.remove({});
         }
     });
 });

@@ -1,13 +1,17 @@
 <template name="foodCam">
   <div class="container nopadding nomargin">
-    <button type="button" class="btn btn-default takePicture col-xs-12">Take Picture</button>
+    <button type="button" class="btn btn-default takePicture col-xs-12">Take a Picture</button>
     
     <br>
     <hr/>
     <br>
 
     <div class="col-xs-12 aligncenter">
-      <img class="photo aligncenter camSizeCustom" src="" alt="Upload Recipt"/>
+      <img class="photo aligncenter camSizeCustom" src=""/>
+      {{#if gotPhoto}}
+      {{else}}
+      <h3>Take Picture, Upload Recipe or Scan!</h3>
+      {{/if}}
     </div>
 
     <br>
@@ -16,14 +20,17 @@
 
     <div class="row">
       <div class="fileinput fileinput-new col-xs-8 col-centered aligncenter fullwidth" data-provides="fileinput">
-          <span class="btn btn-default btn-file"><span>Choose file</span><input type="file" class="filePath"/></span>
+          <span class="btn btn-default btn-file"><span>Choose Recipt</span><input type="file" class="filePath"/></span>
           <span class="fileinput-filename"></span><span class="fileinput-new"></span>
       </div>
-      <div class="col-xs-8 col-centered quirkyone">
-        <button type="button" class="btn btn-default uploadPicture fullwidth aligncenter">Upload Picture</button>
-      </div>
     </div>
-
-    {{test}}
+    <hr/>
+    {{#if getTempFridgeStatus}}
+    <div class="aligncenter">
+      <button class="btn btn-success submitTemp"><h1>Review and Add!</h1></button>
+    </div>
+    {{else}}
+    <h4 class='aligncenter'>{{getStatus}}</h4>
+    {{/if}}
   </div>
 </template>
