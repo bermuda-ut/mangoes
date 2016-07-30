@@ -8,12 +8,14 @@
     </div>
 
     <div class="col-xs-12 aligncenter wtf">
-      <button type="button" class="trans btn btn-info btn-lg" style="border:0px" data-toggle="modal" data-target="#myModal2">
-        <h2>
-          What's in my fridge
-        </h2>
-      </button>
       <button type="button" class="add-ing btn btn-success btn-lg"><h2>Add Ingredients</h2></button>
+    </div>
+    <div class="col-xs-12 aligncenter" style="margin-top: 20px">
+      <button type="button" class="trans btn btn-info btn-lg" style="border:0px" data-toggle="modal" data-target="#myModal2">
+        <h4>
+          What's in my fridge?
+        </h4>
+      </button>
     </div>
 
 
@@ -45,18 +47,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">What's in my fridge</h4>
+        <h4 class="modal-title aligncenter">Fridge Contents</h4>
       </div>
       <div class="modal-body" style="padding-bottom:0px;">
-        <p>
-          <ul>
-            {{#each ingredients}}
-              <li>
-                {{name}} - {{amount}}
-              </li>
-            {{/each}}
-          </ul>
-        </p>
+          {{#each ingredients}}
+          {{>listItems name=name _id=_id}}
+          {{/each}}
       </div>
       <div class="modal-footer" style="padding:5px;">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

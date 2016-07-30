@@ -11,8 +11,13 @@ Template.listItems.helpers({
 
 Template.listItems.events({
     'click .delRecord'(event, instance) {
+        console.log(Template.instance().data._id);
         var id = Template.instance().data._id;
-        TempFridge.remove({'_id': id});
+        var name = Template.instance().data.name;
+        if(TempFridge.findOne({'_id': id, 'name': name}))
+            TempFridge.remove({'_id': id});
+        else
+            Fridge.remove({'_id': id});
     }
 });
 
