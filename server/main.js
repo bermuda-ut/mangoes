@@ -2,15 +2,17 @@ import { Meteor } from 'meteor/meteor';
 import gcloud from 'gcloud';
 import {HTTP} from 'meteor/http';
 
+var fs = Npm.require('fs');
+var path = Npm.require('path');
+var basePath = path.resolve('.').split('.meteor')[0];
+
 var config = {
     projectId: 'pokegomap-1383',
-    keyFilename: '/home/bermudaut/Bermuda/pokegoMap-55c16092e5f7.json'
+    keyFilename: basePath + '/pokegoMap-55c16092e5f7.json'
 };
 
 myVision = gcloud.vision(config);
-var fs = Npm.require('fs');
-__ROOT_APP_PATH__ = fs.realpathSync('.');
-console.log(__ROOT_APP_PATH__);
+
 
 /*
 myVision.detectText('/home/bermudaut/Bermuda/recipt.png', function(err, text) {
@@ -27,12 +29,18 @@ Meteor.startup(() => {
             })
         },
 
-        uploadImg: function(blob) {
-            fs.writeFile('test22.jpg', blob, 'base64', function(err, text) {
-                console.log(err);
+        uploadImg: function(data) {
+            base64Data  =   data.replace(/^data:image\/jpeg;base64,/, "");
+            base64Data  +=  base64Data.replace('+', ' ');
+            binaryData  =   new Buffer(base64Data, 'base64').toString('binary');
+
+            fs.writeFileSync(basePath + 'fuckme.jpeg', binaryData, 'binary');
+
+            myVision.detectText(basePath + 'fuckme.jpeg', function(err, text) {
                 console.log(text);
             });
         },
+
         getRecipe: function(ing) {
             this.unblock();
             let page = "http://www.recipepuppy.com/api?i="+ing;

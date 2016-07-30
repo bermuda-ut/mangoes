@@ -19,15 +19,6 @@ Template.foodCam.events({
         }, function (error, data) {
             if (!error) {
                 this.$('.photo').attr('src', data); 
-                console.log(data);
-
-                //fs.writeFile('test.jpg',  dataURIToBlob(data), function(err) { console.log(err) });
-
-                var fs = require('fs');
-                fs.writeFile('test22.jpg', blob, 'base64', function(err, text) {
-                    console.log(err);
-                    console.log(text);
-                });
 
                 Meteor.call('uploadImg', data, function(err, res) {
                     console.log(err);
@@ -41,5 +32,4 @@ Template.foodCam.events({
 Template.foodCam.onCreated(function foodCamOnCreated() {
   // counter starts at 0
 });
-
 
