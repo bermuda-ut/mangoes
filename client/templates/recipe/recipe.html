@@ -4,7 +4,6 @@
   {{>recipeOfTheDay}}
 </template>
 
-
 <template name="showRecipes">
   <ul>
     {{#each recipes}}
@@ -24,8 +23,10 @@
 
 <template name="singleRecipe">
   {{#with recipe}}
-      <a href={{href}}>{{title}}</a>
-			<iframe src={{href}} style="border: 0; width: 100%; height: 60vh"></iframe>
+    <div class="middle-content">
+      <a href={{href}}>{{title}}<br /><img class="img-rounded image-class" src={{thumbnail}}></a>
+    </div>
+			<!-- <iframe src={{href}} style="border: 0; width: 100%; height: 60vh"></iframe> -->
       <div class="missing-stuff">
         Missing ingredients:
         {{>missingIngredients}}
@@ -43,10 +44,7 @@
 </template>
 
 <template name="recipeOfTheDay">
-  {{#if showAll}}
-    {{>showRecipes}}
-  {{else}}
     {{>singleRecipe}}
-    <button class="btn show-all-btn">Show others</button>
-  {{/if}}
+    <button class="btn show-prev-btn {{canClickPrev}}">Show prev</button>
+    <button class="pull-right btn show-next-btn {{canClickNext}}">Show next</button>
 </template>
