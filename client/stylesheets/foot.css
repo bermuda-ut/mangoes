@@ -1,0 +1,12 @@
+.greyfoot{
+	background-color: #424242;
+	height: 80px;
+	position:fixed;
+   	left:0px;
+   	bottom:0px;
+   	width:100%;
+}
+
+.info1{
+	color: white;
+}

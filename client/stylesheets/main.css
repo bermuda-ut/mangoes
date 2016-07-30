@@ -51,3 +51,18 @@
 .middle-content {
     text-align: center;
 }
+
+
+@font-face {
+    font-family: Homizio;
+    src: url(/fonts/black.ttf);
+}
+
+.title {
+    font-family: 'Homizio';
+    letter-spacing: 5px;
+}
+
+.titleIcon {
+    margin-bottom: 19px;
+}
