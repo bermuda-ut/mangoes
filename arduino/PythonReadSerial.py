@@ -1,9 +1,7 @@
-#!/Users/antontarasenko/Virtualenvs/Unihack/bin/python
-
 import serial, binascii
 
 # Setup serial
-s = serial.Serial(port='/dev/cu.usbmodem1411', baudrate=9600)
+s = serial.Serial(port='/dev/ttyACM0', baudrate=9600)
 
 # Run the read() command while true 
 while True:
