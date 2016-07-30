@@ -4,32 +4,58 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './templates/foodCam.html';
 
 Template.foodCam.helpers({
-    counter() {
-        return Template.instance().counter.get();
+    getTempFridgeStatus() {
+        if(TempFridge.find().count())
+            return true;
+        return false;
     },
+    gotPhoto() {
+      filename = Template.instance().Test.get();
+      if(filename)
+          return true;
+      return false;
+    },
+    getStatus() {
+        return Template.instance().status.get();
+    }
 });
 
 Template.foodCam.events({
   'click .takePicture'(event, instance) {
         console.log("PICUTURE!");
+        Template.instance().Test.set(1);
+        Template.instance().status.set("Loading..");
         MeteorCameraUI.getPicture({
-            quality: 100,
-            width: 400,
-            height: 720
+            quality: 100
         }, function (error, data) {
             if (!error) {
                 this.$('.photo').attr('src', data); 
 
                 Meteor.call('uploadImg', data, function(err, res) {
-                    console.log(err);
                     console.log(res);
                 });
             }
         })
   },
+
+  'change .filePath'(event, instant) {
+      filename = $('.filePath').val().split('\\')[2];
+      Template.instance().Test.set(1);
+        Template.instance().status.set("Loading..");
+
+      Meteor.call('imgToText', '/home/bermudaut/Bermuda/' + filename, function(err,res) {
+          console.log(res);
+      })
+  },
+
+  'click .submitTemp'(event, instant) {
+  }
 });
 
 Template.foodCam.onCreated(function foodCamOnCreated() {
-  // counter starts at 0
+    Meteor.call('resetTemp');
+    Template.instance().Test = new ReactiveVar(0);
+    Template.instance().status = new ReactiveVar("No Ingredients to Add");
+    Template.instance().cursorTempFridge = TempFridge.find();
 });
 
