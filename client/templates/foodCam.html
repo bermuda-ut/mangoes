@@ -1,12 +1,12 @@
 <template name="foodCam">
   <div class="container nopadding nomargin">
-    <button type="button" class="btn btn-default takePicture col-xs-12"><h3>Take a Picture</h3></button>
+    <button type="button" class="animated flipInX btn btn-default takePicture col-xs-12"><h3>Take a Picture</h3></button>
     
     <br>
     <hr/>
     <br>
 
-    <div class="col-xs-12 aligncenter">
+    <div class="col-xs-12 aligncenter animated fadeInLeft">
       <img class="photo aligncenter camSizeCustom" src="images/arr{{number}}.gif"/>
       <br>
       {{#if gotPhoto}}
@@ -23,7 +23,7 @@
     <br>
 
     <div class="row">
-      <div class="fileinput fileinput-new col-xs-8 col-centered aligncenter fullwidth" data-provides="fileinput">
+      <div class="animated flipInX fileinput fileinput-new col-xs-8 col-centered aligncenter fullwidth" data-provides="fileinput">
           <span class="btn btn-default btn-file"><span>Choose Recipt</span><input type="file" class="filePath"/></span>
           <span class="fileinput-filename"></span><span class="fileinput-new"></span>
       </div>
