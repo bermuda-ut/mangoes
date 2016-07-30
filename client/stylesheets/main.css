@@ -41,7 +41,7 @@
 }
 
 .image-class {
-    width: 206px;
+    height: 206px;
 }
 
 .missing-stuff {
@@ -65,4 +65,13 @@
 
 .titleIcon {
     margin-bottom: 19px;
+}
+
+.modal-backdrop {
+    opacity: 0 !important;
+}
+
+.modal {
+    bottom: 80px !important;
+    top: 80px !important;
 }
