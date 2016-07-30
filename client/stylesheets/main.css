@@ -39,3 +39,15 @@
   min-height: 100%;
   border-radius: 0;
 }
+
+.image-class {
+    width: 206px;
+}
+
+.missing-stuff {
+    margin-top: 10px;
+}
+
+.middle-content {
+    text-align: center;
+}

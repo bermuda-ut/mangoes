@@ -3,6 +3,7 @@
 </head>
 
 <template name="mainLayout">
+  {{>bertAlert}}
   {{>banner}}
   <main class='topMain'>
     {{>Template.dynamic template=content data=params}}

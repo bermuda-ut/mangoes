@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import {Bert} from 'meteor/themeteorchef:bert';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import './templates/foodCam.html';
@@ -21,7 +22,7 @@ Template.foodCam.helpers({
 });
 
 Template.foodCam.events({
-  'click .takePicture'(event, instance) {
+    'click .takePicture'(event, instance) {
         console.log("PICUTURE!");
         Template.instance().Test.set(1);
         Template.instance().status.set("Loading..");
@@ -30,22 +31,20 @@ Template.foodCam.events({
         }, function (error, data) {
             if (!error) {
                 this.$('.photo').attr('src', data); 
-
+                Bert.alert('Picture captured!', 'success', 'growl-top-right');
                 Meteor.call('uploadImg', data, function(err, res) {
                     console.log(res);
                 });
             }
-        })
-  },
-
-  'change .filePath'(event, instant) {
-      filename = $('.filePath').val().split('\\')[2];
-      Template.instance().Test.set(1);
+        });
+    }, 'change .filePath'(event, instant) {
+        filename = $('.filePath').val().split('\\')[2];
+        Template.instance().Test.set(1);
         Template.instance().status.set("Loading..");
-
-      Meteor.call('imgToText', '/home/bermudaut/Bermuda/' + filename, function(err,res) {
-          console.log(res);
-      })
+        Bert.alert('Uploaded receipt!', 'success', 'growl-top-right');
+        Meteor.call('imgToText', '/home/bermudaut/Bermuda/' + filename, function(err,res) {
+           console.log(res);
+        });
   },
 
   'click .submitTemp'(event, instant) {

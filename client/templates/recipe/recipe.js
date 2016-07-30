@@ -1,4 +1,5 @@
 import {Session} from 'meteor/session';
+import {Bert} from 'meteor/themeteorchef:bert';
 
 Template.showRecipes.helpers({
     recipes() {
@@ -30,28 +31,43 @@ Template.singleRecipe.helpers({
         Meteor.call('getRecipe', ing, function(e, res) {
             let results = _.uniq(JSON.parse(res.content).results, function(p) {return p.title});
             results = _.filter(results, function(p) {
-                return p.thumbnail != "" && p.href.indexOf("kraft") == -1;
+                return p.thumbnail != "" && p.href.indexOf("kraft") == -1 && p.href.indexOf("cookeatshare") == -1;
             });
             Session.set("results", results);
+            Session.set("ingredientsCount", results.length);
         });
-        return Session.get("results")[0];
+        return Session.get("results")[Session.get("showIndex")];
+    }
+});
+
+
+Template.recipeOfTheDay.events({
+    'click .show-next-btn': function() {
+        if (Session.get('showIndex') + 1 < Session.get('ingredientsCount'))
+            Session.set('showIndex', Session.get('showIndex') + 1);
+    },
+    'click .show-prev-btn': function() {
+        if (Session.get('showIndex') - 1 >= 0)
+            Session.set('showIndex', Session.get('showIndex') - 1);
     }
 });
 
 Template.recipeOfTheDay.helpers({
-	showAll() {
-		return Session.get('showAll');
-	}
-});
-
-Template.recipeOfTheDay.events({
-    'click .show-all-btn': function() {
-        Session.set('showAll', !Session.get('showAll'));
+    canClickPrev() {
+        return Session.get('showIndex') > 0
+                ? ""
+                : "disabled";
+    },
+    canClickNext() {
+        return Session.get('showIndex') 
+        < Session.get("ingredientsCount")-1
+            ? ""
+            : "disabled";
     }
 });
 
 Template.recipeOfTheDay.onCreated(function() {
-    Session.set('showAll', false);
+    Session.setDefault('showIndex', 0);
 });
 
 Template.missingIngredients.helpers({
