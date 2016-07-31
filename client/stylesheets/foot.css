@@ -1,9 +1,9 @@
 .greyfoot{
 	background-color: #f57c00;
 	height: 80px;
+    bottom: 0px;
 	position:fixed;
    	left:0px;
-   	bottom:0px;
    	width:100%;
 }
 
